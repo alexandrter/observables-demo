@@ -1,24 +1,20 @@
 import {Injectable} from '@angular/core';
-import {Observable, Observer} from "rxjs";
+import {Subject} from "rxjs";
 
 @Injectable()
 export class CounterService {
 
-  count = 0;
-  private intervalId = -1;
+  private count = 0;
 
-  observable = new Observable((observer: Observer<number>) => {
-    console.log("we have got a new subscriber!")
-    this.intervalId = setInterval(
-      () => {
-        console.log("tick!") //keeps ticking even after completion!!!
-        if (this.count < 10) {
-          observer.next(this.count);
-        } else {
-          observer.complete();
-        }
-      }, 1000);
+  observable = new Subject<number>();
 
-    return () => console.log("someone just unsubscribed"); //also happens automatically when the observable is completed
-  })
+  increment() {
+    if (this.count < 10) {
+      this.count++;
+      console.log("calling next?")
+      this.observable.next(this.count);
+    } else {
+      this.observable.complete();
+    }
+  }
 }

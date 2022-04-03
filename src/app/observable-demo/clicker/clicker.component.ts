@@ -14,6 +14,6 @@ export class ClickerComponent implements OnInit {
   }
 
   onClick() {
-    this.counterService.count++;
+    this.counterService.increment();
   }
 }
