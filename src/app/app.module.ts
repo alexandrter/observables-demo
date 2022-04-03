@@ -5,12 +5,14 @@ import {AppComponent} from './app.component';
 import {ClickerComponent} from './observable-demo/clicker/clicker.component';
 import {CounterService} from "./observable-demo/counter.service";
 import {ShowerComponent} from "./observable-demo/shower/shower.component";
+import {Shower2Component} from "./observable-demo/shower/shower2.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ClickerComponent,
-    ShowerComponent
+    ShowerComponent,
+    Shower2Component
   ],
   imports: [
     BrowserModule

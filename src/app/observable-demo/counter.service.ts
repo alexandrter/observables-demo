@@ -13,7 +13,6 @@ export class CounterService {
       () => {
         console.log("tick!") //keeps ticking even after completion!!!
         if (this.count < 10) {
-          console.log("calling next!")
           observer.next(this.count);
         } else {
           observer.complete();
