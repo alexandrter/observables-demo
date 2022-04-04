@@ -8,12 +8,8 @@ export class CounterService {
   observable = new EventEmitter<number>();
 
   increment() {
-    if (this.count < 10) {
       this.count++;
-      console.log("calling next?")
-      this.observable.emit(this.count);
-    } else {
-      this.observable.complete();
-    }
+    console.log("observable emitting a value?");
+    this.observable.emit(this.count);
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CounterService} from "../counter.service";
 import {Subscription} from "rxjs";
 
@@ -6,7 +6,7 @@ import {Subscription} from "rxjs";
   selector: 'app-shower',
   templateUrl: './shower.component.html',
 })
-export class ShowerComponent implements OnInit {
+export class ShowerComponent implements OnInit, OnDestroy {
 
   clickCounter = 0;
   subscription?: Subscription;
@@ -15,19 +15,20 @@ export class ShowerComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  }
-
-  subscribe() {
+    console.log("creating shower and subscribing to observable")
     this.subscription = this.counterService.observable
       .subscribe(
-        click => this.clickCounter = click,
+        click => {
+          console.log("subscription consuming the emitted value");
+          this.clickCounter = click;
+        },
         error => console.log("error occurred " + error),
-        () => console.log("observable completed") //does not happen when unsubscribing!
-      ).add(new Subscription(() => console.log("UNSUBSCRIBE")));
+        () => console.log("observable completed")
+      );
   }
 
-  unsubscribe() {
-    this.subscription?.unsubscribe();
+  ngOnDestroy(): void {
+    console.log("destroying shower component");
+    //todo ...
   }
 }
