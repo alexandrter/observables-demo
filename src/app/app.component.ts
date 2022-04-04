@@ -6,9 +6,6 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  showShower = true;
-
   ngOnInit(): void {
-    setTimeout( () => this.showShower = false, 10000);
   }
 }

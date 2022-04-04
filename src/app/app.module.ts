@@ -2,8 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {ClickerComponent} from './observable-demo/clicker/clicker.component';
-import {CounterService} from "./observable-demo/counter.service";
+import {ClickerComponent} from './observable-demo/shower/clicker/clicker.component';
 import {ShowerComponent} from "./observable-demo/shower/shower.component";
 
 @NgModule({
@@ -15,7 +14,7 @@ import {ShowerComponent} from "./observable-demo/shower/shower.component";
   imports: [
     BrowserModule
   ],
-  providers: [CounterService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
