@@ -24,7 +24,7 @@ export class ShowerComponent implements OnInit {
         click => this.clickCounter = click,
         error => console.log("error occurred " + error),
         () => console.log("observable completed") //does not happen when unsubscribing!
-      );
+      ).add(new Subscription(() => console.log("UNSUBSCRIBE")));
   }
 
   unsubscribe() {
