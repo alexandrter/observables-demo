@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, AsyncValidatorFn, FormControl, FormGroup, Validators} from "@angular/forms";
+import {of} from "rxjs";
+import {delay, tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-form',
@@ -11,7 +13,7 @@ export class FormComponent implements OnInit {
 
   constructor() {
     this.myForm = new FormGroup({
-      'username': new FormControl(null, Validators.required),
+      'username': new FormControl(null, Validators.required, this.asyncValidator),
       'email': new FormControl(null),
       'password': new FormControl(null),
     })
@@ -28,4 +30,19 @@ export class FormComponent implements OnInit {
       (status: string) => console.log('username status changed to: ' + status)
     )
   }
+
+  asyncValidator: AsyncValidatorFn =
+    (control: AbstractControl) => {
+
+      if (control.value.includes('dummy')) {
+        return of({dummyValue: true})
+          .pipe(
+            tap(() => console.log("async validator emitted a value")),
+            delay(2000)
+          );
+      }
+
+      return of(null).pipe(delay(2000));
+    }
+  ;
 }
