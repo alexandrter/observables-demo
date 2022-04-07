@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs";
+import {interval, Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-info',
